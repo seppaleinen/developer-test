@@ -10,6 +10,7 @@ import se.comhem.web.test.domain.Hero;
 import se.comhem.web.test.domain.MarvelHero;
 import se.comhem.web.test.services.HeroService;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,22 +28,22 @@ public class HeroController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Map<Integer,Hero>> listHeroes() {
+    public ResponseEntity<List<MarvelHero>> listHeroes() {
 
-        return new ResponseEntity<Map<Integer,Hero>>(heroService.list(), HttpStatus.OK);
+        return new ResponseEntity<>(heroService.list(), HttpStatus.OK);
 
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Hero> getHero(@PathVariable String id) {
+    @RequestMapping(method = RequestMethod.GET, value = "/{name}")
+    public ResponseEntity<MarvelHero> getHero(@PathVariable String name) {
 
         try {
 
-            return new ResponseEntity<Hero>(heroService.get(Integer.parseInt(id)), HttpStatus.OK);
+            return new ResponseEntity<MarvelHero>(heroService.get(name), HttpStatus.OK);
 
         } catch (NumberFormatException nfe) {
 
-            return new ResponseEntity<Hero>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<MarvelHero>(HttpStatus.BAD_REQUEST);
 
         }
     }

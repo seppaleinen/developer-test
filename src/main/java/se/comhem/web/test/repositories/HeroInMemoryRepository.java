@@ -11,7 +11,7 @@ import java.util.Map;
 @Repository("inMemoryRepository")
 public class HeroInMemoryRepository implements HeroRepository {
 
-    private Map<Integer,Hero> repository = new HashMap<Integer,Hero>();
+    private Map<Integer,MarvelHero> repository = new HashMap<Integer,MarvelHero>();
 
     public HeroInMemoryRepository() {
         save(new MarvelHero("SuperMan","Kryptonite",Gender.MAN));
@@ -21,15 +21,15 @@ public class HeroInMemoryRepository implements HeroRepository {
         save(new MarvelHero("Thor","Letting go of his hammer for 60 seconds",Gender.MAN));
     }
 
-    public Map<Integer, Hero> list() {
+    public Map<Integer, MarvelHero> list() {
         return repository;
     }
 
-    public Hero get(Integer id) {
+    public MarvelHero get(Integer id) {
         return repository.get(id);
     }
 
-    public void save(Hero hero) {
+    public void save(MarvelHero hero) {
         repository.put(repository.size(), hero);
     }
 
