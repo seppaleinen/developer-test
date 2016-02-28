@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@EnableWebMvc
 @RequestMapping("heroes")
 public class HeroController {
 

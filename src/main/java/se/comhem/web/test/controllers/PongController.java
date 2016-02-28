@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.comhem.web.test.domain.PingPong;
 
 @Controller
-@EnableWebMvc
 @RequestMapping("ping")
 public class PongController {
 
