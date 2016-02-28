@@ -23,28 +23,30 @@ public class HeroController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     public ResponseEntity<HttpStatus> saveMarvelHero(@RequestBody MarvelHero hero) {
-        heroService.save(hero);
-        return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
+        try {
+            heroService.save(hero);
+            return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<MarvelHero>> listHeroes() {
-
-        return new ResponseEntity<>(heroService.list(), HttpStatus.OK);
-
+        return new ResponseEntity<List<MarvelHero>>(heroService.list(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{name}")
     public ResponseEntity<MarvelHero> getHero(@PathVariable String name) {
-
         try {
-
-            return new ResponseEntity<MarvelHero>(heroService.get(name), HttpStatus.OK);
-
+            MarvelHero hero = heroService.get(name);
+            if(hero == null) {
+                return new ResponseEntity<MarvelHero>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<MarvelHero>(heroService.get(name), HttpStatus.OK);
+            }
         } catch (NumberFormatException nfe) {
-
             return new ResponseEntity<MarvelHero>(HttpStatus.BAD_REQUEST);
-
         }
     }
 }
