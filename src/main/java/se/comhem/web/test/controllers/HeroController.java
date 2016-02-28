@@ -37,8 +37,13 @@ public class HeroController {
     public ResponseEntity<Hero> getHero(@PathVariable String id) {
 
         try {
+            Hero hero = heroService.get(Integer.parseInt(id));
 
-            return new ResponseEntity<Hero>(heroService.get(Integer.parseInt(id)), HttpStatus.OK);
+            if(hero == null) {
+                return new ResponseEntity<Hero>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<Hero>(hero, HttpStatus.OK);
+            }
 
         } catch (NumberFormatException nfe) {
 
