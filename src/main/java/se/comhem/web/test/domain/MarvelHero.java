@@ -1,6 +1,13 @@
 package se.comhem.web.test.domain;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class MarvelHero implements Hero {
+    @Id
+    private Long id;
 
     private String name;
     private String weakness;
@@ -12,6 +19,14 @@ public class MarvelHero implements Hero {
         this.name = name;
         this.weakness = weakness;
         this.gender = gender;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
